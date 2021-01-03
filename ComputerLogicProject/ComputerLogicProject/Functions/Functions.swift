@@ -59,4 +59,26 @@ class Functions {
         }
         return Bool.init()
     }
+    
+    func satisfabilityChecking(formula: Formula) -> Bool {
+        var listOfAtoms = self.listOfAtoms(formula: formula)
+        var interpretation = [String: Bool]()
+        return isSatisfactory(formula: formula, atoms: &listOfAtoms, interpretation: &interpretation)
+    }
+    
+    private func isSatisfactory(formula: Formula, atoms: inout [String], interpretation: inout [String: Bool]) -> Bool {
+        if atoms == [] {
+            return truthValue(formula: formula, interpretation: interpretation)
+        }
+        let atom = atoms.popLast() ?? ""
+        interpretation[atom] = true
+        var interpretationOne = interpretation
+        interpretation[atom] = false
+        var interpretationTwo = interpretation
+        let result = isSatisfactory(formula: formula, atoms: &atoms, interpretation: &interpretationOne)
+        if result {
+            return result
+        }
+        return isSatisfactory(formula: formula, atoms: &atoms, interpretation: &interpretationTwo)
+    }
 }
