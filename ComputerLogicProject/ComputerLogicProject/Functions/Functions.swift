@@ -9,7 +9,7 @@ import Foundation
 
 class Functions {
     
-    func listOfAtoms(formula: Formula) -> [String]{
+    func listOfAtoms(formula: Formula) -> [String] {
         if formula is Atom {
             return [formula.getFormulaDescription()]
         }
