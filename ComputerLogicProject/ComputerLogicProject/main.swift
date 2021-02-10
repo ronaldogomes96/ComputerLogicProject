@@ -1,4 +1,3 @@
-//
 //  main.swift
 //  ComputerLogicProject
 //
@@ -6,7 +5,6 @@
 //
 
 import Foundation
-
 
 let m = [
     [-1, -1, -1, -1],
@@ -91,6 +89,7 @@ func tresMina(posicao: (Int, Int),  vizinhos: [(Int, Int)]) -> Formula {
     let combinacoes = gerarCombinacoesTresMinas(vizinhos: vizinhos)
     let formulaFinal = And(left: posicao1, right: combinacoes)
     return formulaFinal
+
 }
 
 
@@ -120,7 +119,6 @@ let function = Functions()
 
 print(formula.getFormulaDescription())
 print(function.satisfabilityChecking(formula: formula))
-
 
 func gerarCombinacoesDuasMinas(vizinhos: [(Int, Int)]) -> Formula {
     var posicao_pivo = 0
@@ -208,5 +206,3 @@ func gerarCombinacoesTresMinas(vizinhos: [(Int, Int)]) -> Formula {
     return resultado
 
 }
-
-
