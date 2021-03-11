@@ -88,4 +88,37 @@ class Functions {
         }
         return isSatisfactory(formula: formula, atoms: newAtons, interpretation: interpretationTwo)
     }
+    
+    func andAll(listOfFormulas: [Formula]) -> Formula {
+        var firstFormula = listOfFormulas[0]
+        var newListOfFormulas = listOfFormulas
+        newListOfFormulas.remove(at: 0)
+        newListOfFormulas.forEach { (formula) in
+            firstFormula = And(left: firstFormula, right: formula)
+        }
+        return firstFormula
+    }
+
+    func orAll(listOfFormulas: [Formula]) -> Formula {
+        var firstFormula = listOfFormulas[0]
+        var newListOfFormulas = listOfFormulas
+        newListOfFormulas.remove(at: 0)
+        newListOfFormulas.forEach { (formula) in
+            firstFormula = Or(left: firstFormula, right: formula)
+        }
+        return firstFormula
+    }
+    
+    func logicalConsequence(premise: [Formula], conclusion: Formula) -> Bool {
+            var uniquePremise: Formula = premise.first!
+            premise.forEach { formula in
+                uniquePremise = And(left: uniquePremise, right: formula)
+            }
+            let consequence = And(left: uniquePremise, right: Not(atom: conclusion))
+            if (satisfabilityChecking(formula: consequence) as? Bool) == false {
+                return true
+            } else {
+                return false
+            }
+        }
 }
