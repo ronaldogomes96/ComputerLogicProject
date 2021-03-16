@@ -8,17 +8,21 @@ import Foundation
 
 let matrixGrid = [
     [-1, -1, -1, -1],
-    [-1, -1, -1, -1],
-    [-1,  3,  -1, -1],
-    [-1,  -1,  -1, -1]]
+    [-1, -1, 3, -1],
+    [1,  1,  0, -1],
+    [-1,  1,  0, -1]]
 
 let solver = MineSweeperSolver()
 
 let formula = solver.mapMatrix(matrix: matrixGrid)
 let function = Functions()
-
 print(formula.getFormulaDescription())
-let consequence = function.logicalConsequence(premise: [formula], conclusion: Atom(atom: "m1_1"))
-print(consequence)
+let result = function.satisfabilityChecking(formula: formula)
+print(result)
 
-// ["m2_1": false, "m1_1": false, "m1_2": false, "m1_0": false, "m3_2": true, "m3_1": true, "m3_0": true, "m2_2": false, "m2_0": false]
+for collun in 0...matrixGrid[0].count - 1 {
+    for line in 0...matrixGrid.count - 1 {
+        let cosequence = function.logicalConsequence(premise: [formula], conclusion: Atom(atom: "m\(line)_\(collun)"))
+        print("m\(line)_\(collun) = \(cosequence)")
+    }
+}
