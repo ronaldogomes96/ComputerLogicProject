@@ -62,8 +62,23 @@ class Functions {
     
     func satisfabilityChecking(formula: Formula) -> Any {
         let listOfAtoms = self.listOfAtoms(formula: formula)
-        let interpretation = [String: Bool]()
-        return isSatisfactory(formula: formula, atoms: listOfAtoms, interpretation: interpretation)
+        let setList = Set(listOfAtoms)
+        var listOfAtomsTransformed = setList.map { String($0) }
+        
+        let interpretation = self.createInterpretations(formula: formula)
+        
+        listOfAtomsTransformed.forEach {
+            if interpretation[$0] != nil {
+                if let index = listOfAtomsTransformed.firstIndex(of: $0) {
+                    listOfAtomsTransformed.remove(at: index)
+                }
+            }
+        }
+        
+        print(interpretation)
+        print(listOfAtomsTransformed)
+        
+        return isSatisfactory(formula: formula, atoms: listOfAtomsTransformed, interpretation: interpretation)
     }
     
     private func isSatisfactory(formula: Formula, atoms: [String], interpretation: [String: Bool]) -> Any {
@@ -88,4 +103,86 @@ class Functions {
         }
         return isSatisfactory(formula: formula, atoms: newAtons, interpretation: interpretationTwo)
     }
+    
+    func andAll(listOfFormulas: [Formula]) -> Formula {
+        var firstFormula = listOfFormulas[0]
+        var newListOfFormulas = listOfFormulas
+        newListOfFormulas.remove(at: 0)
+        newListOfFormulas.forEach { (formula) in
+            firstFormula = And(left: firstFormula, right: formula)
+        }
+        return firstFormula
+    }
+
+    func orAll(listOfFormulas: [Formula]) -> Formula {
+        var firstFormula = listOfFormulas[0]
+        var newListOfFormulas = listOfFormulas
+        newListOfFormulas.remove(at: 0)
+        newListOfFormulas.forEach { (formula) in
+            firstFormula = Or(left: firstFormula, right: formula)
+        }
+        return firstFormula
+    }
+    
+    func createInterpretations(formula: Formula) -> [String: Bool] {
+        var listOfFormulas = [formula]
+        var interpretationFormulas = [String: Bool]()
+        
+        while true {
+            let listOfFormulasActual = listOfFormulas
+            for (index, insideFormula) in listOfFormulas.enumerated() {
+                if let insideFormula = insideFormula as? And {
+                    listOfFormulas.remove(at: index)
+                    listOfFormulas.append(insideFormula.left)
+                    listOfFormulas.append(insideFormula.right)
+                }
+            }
+            if listOfFormulasActual.count == listOfFormulas.count {
+                break
+            }
+        }
+        
+        listOfFormulas.forEach {
+            if $0 is Atom {
+                interpretationFormulas["\($0.getFormulaDescription())"] = true
+            }
+            if $0 is Not {
+                interpretationFormulas["\($0.getFormulaDescription())"] = false
+            }
+        }
+        
+        return interpretationFormulas
+    }
+    
+    func logicalConsequence(premise: [Formula], conclusion: Formula) -> Bool {
+        var uniquePremise: Formula = premise.first!
+        premise.forEach { formula in
+            uniquePremise = And(left: uniquePremise, right: formula)
+        }
+        let consequence = And(left: uniquePremise, right: Not(atom: conclusion))
+        if (satisfabilityChecking(formula: consequence) as? Bool) == false {
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    func numberOfAtoms(formula: Formula) -> Int {
+        if formula is Atom {
+            return 1
+        }
+        else if formula is Not {
+            guard let newFormula = formula as? Not else {
+                return 0
+            }
+            return numberOfAtoms(formula: newFormula.atom)
+        }
+        else {
+            guard let newFormula = formula as? Implies else {
+                return 0
+            }
+            return numberOfAtoms(formula: newFormula.left) + numberOfAtoms(formula: newFormula.right)
+        }
+    }
+    
 }
