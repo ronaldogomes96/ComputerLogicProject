@@ -67,6 +67,8 @@ class Functions {
         
         let interpretation = self.createInterpretations(formula: formula)
         
+        print(interpretation)
+        
         listOfAtomsTransformed.forEach {
             if interpretation[$0] != nil {
                 if let index = listOfAtomsTransformed.firstIndex(of: $0) {
