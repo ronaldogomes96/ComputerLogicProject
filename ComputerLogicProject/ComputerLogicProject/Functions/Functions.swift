@@ -17,7 +17,7 @@ class Functions {
             guard let newFormula = formula as? Not else {
                 return []
             }
-            return listOfAtoms(formula: newFormula.atom)
+            return listOfAtoms(formula: newFormula.inner)
         }
         else {
             guard let newFormula = formula as? Implies else {
@@ -35,7 +35,7 @@ class Functions {
             guard let newFormula = formula as? Not else {
                 return Bool.init()
             }
-            return !truthValue(formula: newFormula.atom, interpretation: interpretation)
+            return !truthValue(formula: newFormula.inner, interpretation: interpretation)
         }
         else if formula is Implies {
             if let newFormula = formula as? And {
@@ -111,7 +111,7 @@ class Functions {
         var newListOfFormulas = listOfFormulas
         newListOfFormulas.remove(at: 0)
         newListOfFormulas.forEach { (formula) in
-            firstFormula = And(left: firstFormula, right: formula)
+            firstFormula = And(firstFormula, formula)
         }
         return firstFormula
     }
@@ -121,7 +121,7 @@ class Functions {
         var newListOfFormulas = listOfFormulas
         newListOfFormulas.remove(at: 0)
         newListOfFormulas.forEach { (formula) in
-            firstFormula = Or(left: firstFormula, right: formula)
+            firstFormula = Or(firstFormula, formula)
         }
         return firstFormula
     }
@@ -159,9 +159,9 @@ class Functions {
     func logicalConsequence(premise: [Formula], conclusion: Formula) -> Bool {
         var uniquePremise: Formula = premise.first!
         premise.forEach { formula in
-            uniquePremise = And(left: uniquePremise, right: formula)
+            uniquePremise = And(uniquePremise, formula)
         }
-        let consequence = And(left: uniquePremise, right: Not(atom: conclusion))
+        let consequence = And(uniquePremise, Not(conclusion))
         if (satisfabilityChecking(formula: consequence) as? Bool) == false {
             return true
         } else {
@@ -177,7 +177,7 @@ class Functions {
             guard let newFormula = formula as? Not else {
                 return 0
             }
-            return numberOfAtoms(formula: newFormula.atom)
+            return numberOfAtoms(formula: newFormula.inner)
         }
         else {
             guard let newFormula = formula as? Implies else {
