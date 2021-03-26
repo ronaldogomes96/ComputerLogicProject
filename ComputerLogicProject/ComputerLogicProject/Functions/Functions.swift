@@ -75,9 +75,6 @@ class Functions {
             }
         }
         
-        print(interpretation)
-        print(listOfAtomsTransformed)
-        
         return isSatisfactory(formula: formula, atoms: listOfAtomsTransformed, interpretation: interpretation)
     }
     
@@ -160,7 +157,7 @@ class Functions {
             uniquePremise = And(left: uniquePremise, right: formula)
         }
         let consequence = And(left: uniquePremise, right: Not(atom: conclusion))
-        if (satisfabilityChecking(formula: consequence) as? Bool) == false {
+        if satisfabilityChecking(formula: consequence) is Bool {
             return true
         } else {
             return false
@@ -182,6 +179,15 @@ class Functions {
                 return 0
             }
             return numberOfAtoms(formula: newFormula.left) + numberOfAtoms(formula: newFormula.right)
+        }
+    }
+    
+    func getLogicaConsequenceForGrid(grid: [[Int]], formula: Formula) {
+        for collun in 0...grid[0].count - 1 {
+            for line in 0...grid.count - 1 {
+                let cosequence = function.logicalConsequence(premise: [formula], conclusion: Atom(atom: "m\(line)_\(collun)"))
+                print("m\(line)_\(collun) = \(cosequence)")
+            }
         }
     }
     

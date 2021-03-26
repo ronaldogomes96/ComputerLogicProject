@@ -80,7 +80,7 @@ class MineSweeperSolver {
 
     private func twoMines(position: (Int, Int),  neighbours: [(Int, Int)]) -> Formula {
         let posicao1 = Not(atom: Atom(atom:"m\(position.0)_\(position.1)"))
-        let combinacoes = gerarCombinacoeesUmaMina(vizinhos: neighbours)
+        let combinacoes = gerarCombinacoesDuasMinas(vizinhos: neighbours)
         let formulaFinal = And(left: posicao1, right: combinacoes)
         return formulaFinal
     }
@@ -93,33 +93,23 @@ class MineSweeperSolver {
     }
     
     private func gerarCombinacoesDuasMinas(vizinhos: [(Int, Int)]) -> Formula {
-        var posicao_pivo = 0
         var orInterno = [Formula]()
+        var formulaInterna = [Not]()
+        // Criar todas as atomicas
+        for vizinho in vizinhos {
+            formulaInterna.append(Not(atom: Atom(atom: "m\(vizinho.0)_\(vizinho.1)")))
+        }
         
-        for posicao_atual in (0..<vizinhos.count).reversed() {
-            if posicao_pivo > posicao_atual {
-                break
-            }
-            for j in 1..<vizinhos.count {
-                
-                if j != posicao_pivo {
-                    var formulaInterna = [Formula]()
-    
-                    for vizinho in vizinhos {
-                        
-                        if vizinhos[posicao_pivo] == vizinho || vizinhos[j] == vizinho {
-                            formulaInterna.append(Not(atom: Atom(atom: "m\(vizinho.0)_\(vizinho.1)")))
-                        } else {
-                            formulaInterna.append(Atom(atom: "m\(vizinho.0)_\(vizinho.1)"))
-                        }
-                    }
-                    
-                    orInterno.append(functions.andAll(listOfFormulas: formulaInterna))
+        // Criar as atomicas.
+        for i in 0..<vizinhos.count {
+            for j in i..<vizinhos.count {
+                if j != i {
+                    var combinacao = formulaInterna.map { $0 as Formula }
+                    combinacao[i] = formulaInterna[i].atom
+                    combinacao[j] = formulaInterna[j].atom
+                    orInterno.append(functions.andAll(listOfFormulas: combinacao))
                 }
-
             }
-            
-            posicao_pivo += 1
         }
         
         let resultado = functions.orAll(listOfFormulas: orInterno)
@@ -128,24 +118,17 @@ class MineSweeperSolver {
 
     private func gerarCombinacoeesUmaMina(vizinhos: [(Int, Int)]) -> Formula {
         var orInterno = [Formula]()
+        var formulaInterna = [Not]()
+        // Criar todas as atomicas
+        for vizinho in vizinhos {
+            formulaInterna.append(Not(atom: Atom(atom: "m\(vizinho.0)_\(vizinho.1)")))
+        }
         
-        for _ in 0..<vizinhos.count {
-            for j in 0..<vizinhos.count {
-                
-                var formulaInterna = [Formula]()
-                // GERAR PROPOSICOES
-                for vizinho in vizinhos {
-                    
-                    if vizinhos[j] == vizinho {
-                        formulaInterna.append(Atom(atom: "m\(vizinho.0)_\(vizinho.1)"))
-                    } else {
-                        formulaInterna.append(Not(atom: Atom(atom: "m\(vizinho.0)_\(vizinho.1)")))
-                    }
-                }
-                
-                orInterno.append(functions.andAll(listOfFormulas: formulaInterna))
-                
-            }
+        // Criar as atomicas.
+        for i in 0..<vizinhos.count {
+            var combinacao = formulaInterna.map { $0 as Formula }
+            combinacao[i] = formulaInterna[i].atom
+            orInterno.append(functions.andAll(listOfFormulas: combinacao))
         }
         
         let resultado = functions.orAll(listOfFormulas: orInterno)

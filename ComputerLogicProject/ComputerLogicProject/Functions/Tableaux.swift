@@ -205,4 +205,13 @@ class Tableaux {
         
         return false
     }
+    
+    func getLogicaConsequenceForGrid(grid: [[Int]], formula: Formula) {
+        for collun in 0...grid[0].count - 1 {
+            for line in 0...grid.count - 1 {
+                let cosequence = self.logicalConsequence(premise: [formula], conclusion: Atom(atom: "m\(line)_\(collun)"))
+                print("m\(line)_\(collun) = \(cosequence)")
+            }
+        }
+    }
 }

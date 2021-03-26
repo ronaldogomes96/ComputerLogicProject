@@ -11,17 +11,56 @@ let grid = Grid()
 let mine = MineSweeperSolver()
 let function = Functions()
 let tableaux = Tableaux()
+var results = [String: [Double]]()
 
-//let formula = mine.mapMatrix(matrix: matrixGrid)
-////print(formula.getFormulaDescription())
-////let result = function.satisfabilityChecking(formula: formula)
-////print(result)
-//let resultTableaux = tableaux.tableaux(formulas: [formula], isCheck: [false])
-//print(resultTableaux)
 
-//for collun in 0...matrixGrid[0].count - 1 {
-//    for line in 0...matrixGrid.count - 1 {
-//        let cosequence = tableaux.logicalConsequence(premise: [formula], conclusion: Atom(atom: "m\(line)_\(collun)"))
-//        print("m\(line)_\(collun) = \(cosequence)")
-//    }
-//}
+////Percorre cada um dos 10 grids
+for (index, grid) in grid.listOfGrid().enumerated() {
+
+    //Faz a modelagem do grid em uma formula
+    let formula = mine.mapMatrix(matrix: grid)
+
+    print("\n\n\nGRID\(index)")
+    results["\(index+1)"] = []
+
+    // run your work
+    print(formula.getFormulaDescription())
+
+    //Consequencia logica normal, de forca bruta
+    print("\nSATISFABILIDADE")
+    var start = CFAbsoluteTimeGetCurrent()
+    function.getLogicaConsequenceForGrid(grid: grid, formula: formula)
+    var diff = CFAbsoluteTimeGetCurrent() - start
+    results["\(index+1)"]?.append(diff.toMinutes())
+    print(results)
+
+    //Consequencia logica pelo metodo dos tableaux
+    print("\nTABLEUX")
+    start = CFAbsoluteTimeGetCurrent()
+    tableaux.getLogicaConsequenceForGrid(grid: grid, formula: formula)
+    diff = CFAbsoluteTimeGetCurrent() - start
+    results["\(index+1)"]?.append(diff.toMinutes())
+    print(results)
+}
+
+
+//Salvando
+if #available(OSX 10.12, *) {
+    let path = FileManager.default.homeDirectoryForCurrentUser.appendingPathComponent("Downloads/results")
+    print(path)
+    let encoder = JSONEncoder()
+    encoder.outputFormatting = .prettyPrinted
+    do { // write
+        let jsonData = try encoder.encode(results.self)
+        if let jsonString = String(data: jsonData, encoding: .utf8) {
+            try jsonString.write(to: URL(fileURLWithPath: path.relativePath), atomically: true, encoding: .utf8)
+        }
+    } catch {
+        print(error.localizedDescription)
+    }
+} else {
+    // Fallback on earlier versions
+}
+
+
+

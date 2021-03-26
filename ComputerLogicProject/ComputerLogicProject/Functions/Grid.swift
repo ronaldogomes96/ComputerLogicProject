@@ -10,8 +10,8 @@ import Foundation
 class Grid {
     
     let gridOne = [
-        [2, -1],
-        [-1, 1]
+        [3, -1],
+        [-1, -1]
     ]
     
     let gridTwo = [
@@ -33,8 +33,8 @@ class Grid {
     
     let gridFive = [
         [-1, -1, -1],
-        [-1, 3, 1],
-        [-1, -1, 0]
+        [1, 3, 1],
+        [0, 0, 0]
     ]
     
     let gridSix = [
