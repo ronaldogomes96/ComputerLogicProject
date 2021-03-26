@@ -16,6 +16,7 @@
 		77013BD1258D1E5300FB4FA3 /* Or.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77013BD0258D1E5300FB4FA3 /* Or.swift */; };
 		778E5D6B25A14DC300B57002 /* Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 778E5D6A25A14DC300B57002 /* Functions.swift */; };
 		77C43707260E528A000ECD14 /* Tableaux.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77C43706260E528A000ECD14 /* Tableaux.swift */; };
+		77C4370F260E5DF6000ECD14 /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77C4370E260E5DF6000ECD14 /* Grid.swift */; };
 		81BB494F260A604400BDC688 /* MineSweeperSolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81BB494E260A604400BDC688 /* MineSweeperSolver.swift */; };
 /* End PBXBuildFile section */
 
@@ -42,6 +43,7 @@
 		77013BD0258D1E5300FB4FA3 /* Or.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Or.swift; sourceTree = "<group>"; };
 		778E5D6A25A14DC300B57002 /* Functions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Functions.swift; sourceTree = "<group>"; };
 		77C43706260E528A000ECD14 /* Tableaux.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tableaux.swift; sourceTree = "<group>"; };
+		77C4370E260E5DF6000ECD14 /* Grid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grid.swift; sourceTree = "<group>"; };
 		81BB494E260A604400BDC688 /* MineSweeperSolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MineSweeperSolver.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -101,6 +103,7 @@
 			children = (
 				778E5D6A25A14DC300B57002 /* Functions.swift */,
 				77C43706260E528A000ECD14 /* Tableaux.swift */,
+				77C4370E260E5DF6000ECD14 /* Grid.swift */,
 			);
 			path = Functions;
 			sourceTree = "<group>";
@@ -166,6 +169,7 @@
 				77013BC8258D1E0700FB4FA3 /* Not.swift in Sources */,
 				77013BD1258D1E5300FB4FA3 /* Or.swift in Sources */,
 				77C43707260E528A000ECD14 /* Tableaux.swift in Sources */,
+				77C4370F260E5DF6000ECD14 /* Grid.swift in Sources */,
 				778E5D6B25A14DC300B57002 /* Functions.swift in Sources */,
 				77013BCB258D1E1D00FB4FA3 /* Implies.swift in Sources */,
 				77013BCE258D1E3800FB4FA3 /* And.swift in Sources */,
