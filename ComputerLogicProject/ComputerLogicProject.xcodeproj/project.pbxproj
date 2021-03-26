@@ -15,6 +15,7 @@
 		77013BCE258D1E3800FB4FA3 /* And.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77013BCD258D1E3800FB4FA3 /* And.swift */; };
 		77013BD1258D1E5300FB4FA3 /* Or.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77013BD0258D1E5300FB4FA3 /* Or.swift */; };
 		778E5D6B25A14DC300B57002 /* Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 778E5D6A25A14DC300B57002 /* Functions.swift */; };
+		77C43707260E528A000ECD14 /* Tableaux.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77C43706260E528A000ECD14 /* Tableaux.swift */; };
 		81BB494F260A604400BDC688 /* MineSweeperSolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81BB494E260A604400BDC688 /* MineSweeperSolver.swift */; };
 /* End PBXBuildFile section */
 
@@ -40,6 +41,7 @@
 		77013BCD258D1E3800FB4FA3 /* And.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = And.swift; sourceTree = "<group>"; };
 		77013BD0258D1E5300FB4FA3 /* Or.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Or.swift; sourceTree = "<group>"; };
 		778E5D6A25A14DC300B57002 /* Functions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Functions.swift; sourceTree = "<group>"; };
+		77C43706260E528A000ECD14 /* Tableaux.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tableaux.swift; sourceTree = "<group>"; };
 		81BB494E260A604400BDC688 /* MineSweeperSolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MineSweeperSolver.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -98,6 +100,7 @@
 			isa = PBXGroup;
 			children = (
 				778E5D6A25A14DC300B57002 /* Functions.swift */,
+				77C43706260E528A000ECD14 /* Tableaux.swift */,
 			);
 			path = Functions;
 			sourceTree = "<group>";
@@ -129,7 +132,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1230;
-				LastUpgradeCheck = 1230;
+				LastUpgradeCheck = 1240;
 				TargetAttributes = {
 					77013BB3258D177300FB4FA3 = {
 						CreatedOnToolsVersion = 12.3;
@@ -162,6 +165,7 @@
 				77013BC2258D1DCB00FB4FA3 /* FormulaProtocol.swift in Sources */,
 				77013BC8258D1E0700FB4FA3 /* Not.swift in Sources */,
 				77013BD1258D1E5300FB4FA3 /* Or.swift in Sources */,
+				77C43707260E528A000ECD14 /* Tableaux.swift in Sources */,
 				778E5D6B25A14DC300B57002 /* Functions.swift in Sources */,
 				77013BCB258D1E1D00FB4FA3 /* Implies.swift in Sources */,
 				77013BCE258D1E3800FB4FA3 /* And.swift in Sources */,
@@ -292,6 +296,7 @@
 		77013BBC258D177300FB4FA3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -302,6 +307,7 @@
 		77013BBD258D177300FB4FA3 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_NAME = "$(TARGET_NAME)";
