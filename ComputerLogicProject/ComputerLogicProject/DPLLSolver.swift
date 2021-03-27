@@ -60,7 +60,7 @@ class DPLLSolver {
     
     internal func removeClauses(from formula: [[Int]], with literal: Int) -> [[Int]] {
         var newFormula = formula
-        for (indexClause, clause) in newFormula.enumerated() {
+        for clause in newFormula {
                 if clause.contains(literal) {
                     let index = newFormula.lastIndex(of: clause)!
                     newFormula.remove(at: index)
