@@ -17,7 +17,7 @@ class Functions {
             guard let newFormula = formula as? Not else {
                 return []
             }
-            return listOfAtoms(formula: newFormula.atom)
+            return listOfAtoms(formula: newFormula.inner)
         }
         else {
             guard let newFormula = formula as? Implies else {
@@ -35,7 +35,7 @@ class Functions {
             guard let newFormula = formula as? Not else {
                 return Bool.init()
             }
-            return !truthValue(formula: newFormula.atom, interpretation: interpretation)
+            return !truthValue(formula: newFormula.inner, interpretation: interpretation)
         }
         else if formula is Implies {
             if let newFormula = formula as? And {
@@ -66,7 +66,7 @@ class Functions {
         var listOfAtomsTransformed = setList.map { String($0) }
         
         let interpretation = self.createInterpretations(formula: formula)
-        
+                
         listOfAtomsTransformed.forEach {
             if interpretation[$0] != nil {
                 if let index = listOfAtomsTransformed.firstIndex(of: $0) {
@@ -106,7 +106,7 @@ class Functions {
         var newListOfFormulas = listOfFormulas
         newListOfFormulas.remove(at: 0)
         newListOfFormulas.forEach { (formula) in
-            firstFormula = And(left: firstFormula, right: formula)
+            firstFormula = And(firstFormula, formula)
         }
         return firstFormula
     }
@@ -116,7 +116,7 @@ class Functions {
         var newListOfFormulas = listOfFormulas
         newListOfFormulas.remove(at: 0)
         newListOfFormulas.forEach { (formula) in
-            firstFormula = Or(left: firstFormula, right: formula)
+            firstFormula = Or(firstFormula, formula)
         }
         return firstFormula
     }
@@ -155,9 +155,9 @@ class Functions {
         var premise = premise
         var uniquePremise: Formula = premise.popLast()!
         premise.forEach { formula in
-            uniquePremise = And(left: uniquePremise, right: formula)
+            uniquePremise = And(uniquePremise, formula)
         }
-        let consequence = And(left: uniquePremise, right: Not(atom: conclusion))
+        let consequence = And(uniquePremise, Not(conclusion))
         if satisfabilityChecking(formula: consequence) is Bool {
             return true
         } else {
@@ -173,7 +173,7 @@ class Functions {
             guard let newFormula = formula as? Not else {
                 return 0
             }
-            return numberOfAtoms(formula: newFormula.atom)
+            return numberOfAtoms(formula: newFormula.inner)
         }
         else {
             guard let newFormula = formula as? Implies else {
@@ -186,7 +186,7 @@ class Functions {
     func getLogicaConsequenceForGrid(grid: [[Int]], formula: Formula) {
         for collun in 0...grid[0].count - 1 {
             for line in 0...grid.count - 1 {
-                let cosequence = function.logicalConsequence(premise: [formula], conclusion: Atom(atom: "m\(line)_\(collun)"))
+                let cosequence = function.logicalConsequence(premise: [formula], conclusion: Atom("m\(line)_\(collun)"))
                 print("m\(line)_\(collun) = \(cosequence)")
             }
         }

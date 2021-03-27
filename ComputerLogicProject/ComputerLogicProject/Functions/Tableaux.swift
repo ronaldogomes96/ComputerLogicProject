@@ -13,9 +13,9 @@ class Tableaux {
         var premise = premise
         var uniquePremise: Formula = premise.popLast()!
         premise.forEach { formula in
-            uniquePremise = And(left: uniquePremise, right: formula)
+            uniquePremise = And(uniquePremise, formula)
         }
-        let consequence = And(left: uniquePremise, right: Not(atom: conclusion))
+        let consequence = And(uniquePremise, Not(conclusion))
         if tableaux(formulas: [consequence], isCheck: [false]) == false {
             return true
         } else {
@@ -74,7 +74,7 @@ class Tableaux {
                 //Not
                 else if let value = value as? Not {
                     //Valor interno é um Atom
-                    if value.atom is Atom {
+                    if value.inner is Atom {
                         //Caso não tenha uma contradição
                         if !isContradiction(results: formulas) {
                             //Caso nao tenha mais elementos para analisar, ou seja é o ultimo da arvore
@@ -92,22 +92,22 @@ class Tableaux {
                     }
                     
                     //Valor interno é um Not
-                    else if let valueAsNot = value.atom as? Not {
-                        formulas[index] = valueAsNot.atom
+                    else if let valueAsNot = value.inner as? Not {
+                        formulas[index] = valueAsNot.inner
                         isCheck[index] = false
                         return tableaux(formulas: formulas, isCheck: isCheck)
                     }
                     
                     //Valor interno é OR
-                    else if let valueAsOr = value.atom as? Or {
-                        formulas.append(Not(atom: valueAsOr.left))
+                    else if let valueAsOr = value.inner as? Or {
+                        formulas.append(Not(valueAsOr.left))
                         isCheck.append(false)
                         //Caso o primeiro elemento ja tenha uma contradicao
                         if isContradiction(results: formulas) {
                             return false
                         }
                         
-                        formulas.append(Not(atom: valueAsOr.right))
+                        formulas.append(Not(valueAsOr.right))
                         isCheck.append(false)
                         //Caso o segundo elementos tenha uma contradicao
                         if isContradiction(results: formulas) {
@@ -118,7 +118,7 @@ class Tableaux {
                     }
                     
                     //Valor interno é IMPLIES
-                    else if let valueAsImplies = value.atom as? Implies {
+                    else if let valueAsImplies = value.inner as? Implies {
                         formulas.append(valueAsImplies.left)
                         isCheck.append(false)
                         //Caso o primeiro elemento ja tenha uma contradicao
@@ -126,7 +126,7 @@ class Tableaux {
                             return false
                         }
                         
-                        formulas.append(Not(atom: valueAsImplies.right))
+                        formulas.append(Not(valueAsImplies.right))
                         isCheck.append(false)
                         //Caso o segundo elementos tenha uma contradicao
                         if isContradiction(results: formulas) {
@@ -137,8 +137,8 @@ class Tableaux {
                     }
                     
                     //Valor interno é AND
-                    else if let valueAsAnd = value.atom as? And {
-                        formulas.append(Not(atom: valueAsAnd.left))
+                    else if let valueAsAnd = value.inner as? And {
+                        formulas.append(Not(valueAsAnd.left))
                         isCheck.append(false)
                         //Caso esse ramo seja satisfativel
                         if tableaux(formulas: formulas, isCheck: isCheck) {
@@ -146,7 +146,7 @@ class Tableaux {
                         }
                         //Caso nao seja, remove o elemento e vai para o outro ramo
                         formulas.removeLast()
-                        formulas.append(Not(atom: valueAsAnd.right))
+                        formulas.append(Not(valueAsAnd.right))
                         return tableaux(formulas: formulas, isCheck: isCheck)
                     }
                 }
@@ -171,7 +171,7 @@ class Tableaux {
                         fatalError()
                     }
                                         
-                    formulas.append(Not(atom: value.left))
+                    formulas.append(Not(value.left))
                     isCheck.append(false)
                     //Caso esse ramo seja satisfativel
                     if tableaux(formulas: formulas, isCheck: isCheck) {
@@ -193,12 +193,12 @@ class Tableaux {
         let formulaForComparation = formula.popLast()!
         for formula in formula {
             if let formulaForComparation = formulaForComparation as? Not {
-                if formula.getFormulaDescription() == formulaForComparation.atom.getFormulaDescription() {
+                if formula.getFormulaDescription() == formulaForComparation.inner.getFormulaDescription() {
                     return true
                 }
             }
             if let formula = formula as? Not {
-                if formula.atom.getFormulaDescription() == formulaForComparation.getFormulaDescription() {
+                if formula.inner.getFormulaDescription() == formulaForComparation.getFormulaDescription() {
                     return true
                 }
             }
@@ -210,7 +210,7 @@ class Tableaux {
     func getLogicaConsequenceForGrid(grid: [[Int]], formula: Formula) {
         for collun in 0...grid[0].count - 1 {
             for line in 0...grid.count - 1 {
-                let cosequence = self.logicalConsequence(premise: [formula], conclusion: Atom(atom: "m\(line)_\(collun)"))
+                let cosequence = self.logicalConsequence(premise: [formula], conclusion: Atom("m\(line)_\(collun)"))
                 print("m\(line)_\(collun) = \(cosequence)")
             }
         }

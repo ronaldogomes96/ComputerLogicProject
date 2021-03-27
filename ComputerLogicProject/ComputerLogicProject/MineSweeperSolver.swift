@@ -61,34 +61,32 @@ class MineSweeperSolver {
 
     private func notAll(position: (Int, Int), neighbours: [(Int, Int)]) -> Formula {
         var formulas = [Formula]()
-        formulas.append(Not(atom: Atom(atom:"m\(position.0)_\(position.1)")))
+        formulas.append(Not(Atom("m\(position.0)_\(position.1)")))
         
         for neighbour in neighbours {
-            formulas.append(Not(atom: Atom(atom: "m\(neighbour.0)_\(neighbour.1)")))
+            formulas.append(Not(Atom("m\(neighbour.0)_\(neighbour.1)")))
         }
         return functions.andAll(listOfFormulas: formulas)
     }
-    
-//    private func createMineComb(position: position: (Int, Int),  neighbours: [(Int, Int)], type: (Int) -> )
 
     private func oneMine(position: (Int, Int),  neighbours: [(Int, Int)]) -> Formula {
-        let posicao1 = Not(atom: Atom(atom:"m\(position.0)_\(position.1)"))
+        let posicao1 = Not(Atom("m\(position.0)_\(position.1)"))
         let combinations = gerarCombinacoeesUmaMina(vizinhos: neighbours)
-        let formulaFinal = And(left: posicao1, right: combinations)
+        let formulaFinal = And(posicao1, combinations)
         return formulaFinal
     }
 
     private func twoMines(position: (Int, Int),  neighbours: [(Int, Int)]) -> Formula {
-        let posicao1 = Not(atom: Atom(atom:"m\(position.0)_\(position.1)"))
+        let posicao1 = Not(Atom("m\(position.0)_\(position.1)"))
         let combinacoes = gerarCombinacoesDuasMinas(vizinhos: neighbours)
-        let formulaFinal = And(left: posicao1, right: combinacoes)
+        let formulaFinal = And(posicao1, combinacoes)
         return formulaFinal
     }
 
     private func threeMines(position: (Int, Int),  neighbours: [(Int, Int)]) -> Formula {
-        let posicao1 = Not(atom: Atom(atom:"m\(position.0)_\(position.1)"))
+        let posicao1 = Not(Atom("m\(position.0)_\(position.1)"))
         let combinacoes = gerarCombinacoesTresMinas(vizinhos: neighbours)
-        let formulaFinal = And(left: posicao1, right: combinacoes)
+        let formulaFinal = And(posicao1, combinacoes)
         return formulaFinal
     }
     
@@ -97,7 +95,7 @@ class MineSweeperSolver {
         var formulaInterna = [Not]()
         // Criar todas as atomicas
         for vizinho in vizinhos {
-            formulaInterna.append(Not(atom: Atom(atom: "m\(vizinho.0)_\(vizinho.1)")))
+            formulaInterna.append(Not(Atom("m\(vizinho.0)_\(vizinho.1)")))
         }
         
         // Criar as atomicas.
@@ -105,8 +103,8 @@ class MineSweeperSolver {
             for j in i..<vizinhos.count {
                 if j != i {
                     var combinacao = formulaInterna.map { $0 as Formula }
-                    combinacao[i] = formulaInterna[i].atom
-                    combinacao[j] = formulaInterna[j].atom
+                    combinacao[i] = formulaInterna[i].inner
+                    combinacao[j] = formulaInterna[j].inner
                     orInterno.append(functions.andAll(listOfFormulas: combinacao))
                 }
             }
@@ -121,13 +119,13 @@ class MineSweeperSolver {
         var formulaInterna = [Not]()
         // Criar todas as atomicas
         for vizinho in vizinhos {
-            formulaInterna.append(Not(atom: Atom(atom: "m\(vizinho.0)_\(vizinho.1)")))
+            formulaInterna.append(Not(Atom("m\(vizinho.0)_\(vizinho.1)")))
         }
         
         // Criar as atomicas.
         for i in 0..<vizinhos.count {
             var combinacao = formulaInterna.map { $0 as Formula }
-            combinacao[i] = formulaInterna[i].atom
+            combinacao[i] = formulaInterna[i].inner
             orInterno.append(functions.andAll(listOfFormulas: combinacao))
         }
         
@@ -140,7 +138,7 @@ class MineSweeperSolver {
         var formulaInterna = [Not]()
         // Criar todas as atomicas
         for vizinho in vizinhos {
-            formulaInterna.append(Not(atom: Atom(atom: "m\(vizinho.0)_\(vizinho.1)")))
+            formulaInterna.append(Not(Atom("m\(vizinho.0)_\(vizinho.1)")))
         }
         
         // Criar as atomicas.
@@ -149,9 +147,9 @@ class MineSweeperSolver {
                 for k in j..<vizinhos.count {
                     if j != k && j != i {
                         var combinacao = formulaInterna.map { $0 as Formula }
-                        combinacao[i] = formulaInterna[i].atom
-                        combinacao[j] = formulaInterna[j].atom
-                        combinacao[k] = formulaInterna[k].atom
+                        combinacao[i] = formulaInterna[i].inner
+                        combinacao[j] = formulaInterna[j].inner
+                        combinacao[k] = formulaInterna[k].inner
                         orInterno.append(functions.andAll(listOfFormulas: combinacao))
                     }
                 }

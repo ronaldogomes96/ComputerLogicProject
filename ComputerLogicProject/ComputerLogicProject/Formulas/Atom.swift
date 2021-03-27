@@ -11,7 +11,7 @@ class Atom: Formula {
     
     let atom: String
     
-    init(atom: String) {
+    init(_ atom: String) {
         self.atom = atom
     }
     
