@@ -92,14 +92,13 @@
 			isa = PBXGroup;
 			children = (
 				77013BB7258D177300FB4FA3 /* main.swift */,
-				81BFB6B4260E73B500CF2C8A /* Files */,
-				81BFB6AF260E739C00CF2C8A /* Helpers */,
-				77013BBF258D1D8800FB4FA3 /* Formulas */,
-				77013BC0258D1D9000FB4FA3 /* Functions */,
-				818ACC81260268F20033F65F /* MineSweeperDPPLSolver.swift */,
-				81BFB6D1260F50EC00CF2C8A /* DPLLSolver.swift */,
 				81BB494E260A604400BDC688 /* MineSweeperSolver.swift */,
-				77C43711260E8AB8000ECD14 /* extension.swift */,
+				77C4370E260E5DF6000ECD14 /* Grid.swift */,
+				77013BBF258D1D8800FB4FA3 /* Formulas */,
+				770F2D9D260FA970008A2A20 /* Brute Force */,
+				77013BC0258D1D9000FB4FA3 /* Tableaux */,
+				770F2D9F260FA9D2008A2A20 /* DPLL */,
+				81BFB6AF260E739C00CF2C8A /* Helpers */,
 			);
 			path = ComputerLogicProject;
 			sourceTree = "<group>";
@@ -117,20 +116,37 @@
 			path = Formulas;
 			sourceTree = "<group>";
 		};
-		77013BC0258D1D9000FB4FA3 /* Functions */ = {
+		77013BC0258D1D9000FB4FA3 /* Tableaux */ = {
+			isa = PBXGroup;
+			children = (
+				77C43706260E528A000ECD14 /* Tableaux.swift */,
+			);
+			path = Tableaux;
+			sourceTree = "<group>";
+		};
+		770F2D9D260FA970008A2A20 /* Brute Force */ = {
 			isa = PBXGroup;
 			children = (
 				778E5D6A25A14DC300B57002 /* Functions.swift */,
-				77C43706260E528A000ECD14 /* Tableaux.swift */,
-				77C4370E260E5DF6000ECD14 /* Grid.swift */,
 			);
-			path = Functions;
+			path = "Brute Force";
+			sourceTree = "<group>";
+		};
+		770F2D9F260FA9D2008A2A20 /* DPLL */ = {
+			isa = PBXGroup;
+			children = (
+				81BFB6D1260F50EC00CF2C8A /* DPLLSolver.swift */,
+				818ACC81260268F20033F65F /* MineSweeperDPPLSolver.swift */,
+				81BFB6B4260E73B500CF2C8A /* Files */,
+			);
+			path = DPLL;
 			sourceTree = "<group>";
 		};
 		81BFB6AF260E739C00CF2C8A /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
 				81BFB6B0260E73A800CF2C8A /* CNF.swift */,
+				77C43711260E8AB8000ECD14 /* extension.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
