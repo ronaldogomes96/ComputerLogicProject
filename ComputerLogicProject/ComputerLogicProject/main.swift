@@ -20,7 +20,7 @@ for (index, grid) in grid.listOfGrid().enumerated() {
     //Faz a modelagem do grid em uma formula
     let formula = mine.mapMatrix(matrix: grid)
 
-    print("\n\n\nGRID\(index)")
+    print("\n\n\nGRID\(index+1)")
     results["\(index+1)"] = []
 
     // run your work

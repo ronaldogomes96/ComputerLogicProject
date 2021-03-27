@@ -152,7 +152,8 @@ class Functions {
     }
     
     func logicalConsequence(premise: [Formula], conclusion: Formula) -> Bool {
-        var uniquePremise: Formula = premise.first!
+        var premise = premise
+        var uniquePremise: Formula = premise.popLast()!
         premise.forEach { formula in
             uniquePremise = And(left: uniquePremise, right: formula)
         }
