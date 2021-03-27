@@ -66,9 +66,7 @@ class Functions {
         var listOfAtomsTransformed = setList.map { String($0) }
         
         let interpretation = self.createInterpretations(formula: formula)
-        
-        print(interpretation)
-        
+                
         listOfAtomsTransformed.forEach {
             if interpretation[$0] != nil {
                 if let index = listOfAtomsTransformed.firstIndex(of: $0) {
@@ -76,9 +74,6 @@ class Functions {
                 }
             }
         }
-        
-        print(interpretation)
-        print(listOfAtomsTransformed)
         
         return isSatisfactory(formula: formula, atoms: listOfAtomsTransformed, interpretation: interpretation)
     }
@@ -157,12 +152,13 @@ class Functions {
     }
     
     func logicalConsequence(premise: [Formula], conclusion: Formula) -> Bool {
-        var uniquePremise: Formula = premise.first!
+        var premise = premise
+        var uniquePremise: Formula = premise.popLast()!
         premise.forEach { formula in
             uniquePremise = And(uniquePremise, formula)
         }
         let consequence = And(uniquePremise, Not(conclusion))
-        if (satisfabilityChecking(formula: consequence) as? Bool) == false {
+        if satisfabilityChecking(formula: consequence) is Bool {
             return true
         } else {
             return false
@@ -184,6 +180,15 @@ class Functions {
                 return 0
             }
             return numberOfAtoms(formula: newFormula.left) + numberOfAtoms(formula: newFormula.right)
+        }
+    }
+    
+    func getLogicaConsequenceForGrid(grid: [[Int]], formula: Formula) {
+        for collun in 0...grid[0].count - 1 {
+            for line in 0...grid.count - 1 {
+                let cosequence = function.logicalConsequence(premise: [formula], conclusion: Atom("m\(line)_\(collun)"))
+                print("m\(line)_\(collun) = \(cosequence)")
+            }
         }
     }
     
