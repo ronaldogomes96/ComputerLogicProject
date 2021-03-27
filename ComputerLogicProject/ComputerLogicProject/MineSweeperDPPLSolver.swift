@@ -194,3 +194,38 @@ class MineSweeperDPLL: DPLL {
     
 }
 
+struct DPLLTests {
+
+    func removeClauseTest() {
+        let solver = MineSweeperDPLL()
+        let formulaClausal: [[Formula]] = [ [Or(Atom("c"), Or(Atom("d"), Atom("f")))] , [Atom("b")] ]
+        var result = solver.removeClauses(from: formulaClausal, with: Atom("b"))
+        result = solver.removeClauses(from: result, with:  Atom("d"))
+        result.forEach { $0.forEach { print($0.getFormulaDescription()) }}
+    }
+
+    func dpllSolveTest() {
+        let dpll = MineSweeperDPLL()
+        let formulaClausal: [[Formula]] = [ [Or(Atom("c"), Or(Atom("d"), Atom("f")))] , [Atom("b")] ]
+        print(formulaClausal.map { $0.map { $0.getFormulaDescription()} })
+        let result = dpll.solve(formulaClausal)
+        print(result)
+    }
+
+    func getLiteralUnitTest() {
+        let solver = MineSweeperDPLL()
+        let formulaClausal: [[Formula]] = [ [Or(Atom("c"), Or(Atom("d"), Atom("f")))] , [Atom("b")] ]
+        let literalUnit = solver.getLiteralUnit(from: formulaClausal)
+        print(literalUnit!)
+    }
+
+    func removeComplementsTest() {
+        let solver = MineSweeperDPLL()
+        let formulaClausal: [[Formula]] = [ [Or(Atom("c"), Or(Atom("d"), Not(Atom("f"))))] , [Atom("b")] ]
+        formulaClausal.forEach { $0.forEach { print($0.getFormulaDescription()) }}
+        print("\n")
+        let result2 = solver.removeComplement(from: formulaClausal, with: Not(Atom("f")))
+        print(result2.map { $0.map { $0.getFormulaDescription()} })
+    }
+}
+

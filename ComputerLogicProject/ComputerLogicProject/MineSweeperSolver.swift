@@ -78,7 +78,7 @@ class MineSweeperSolver {
 
     private func twoMines(position: (Int, Int),  neighbours: [(Int, Int)]) -> Formula {
         let posicao1 = Not(Atom("m\(position.0)_\(position.1)"))
-        let combinacoes = gerarCombinacoeesUmaMina(vizinhos: neighbours)
+        let combinacoes = gerarCombinacoesDuasMinas(vizinhos: neighbours)
         let formulaFinal = And(posicao1, combinacoes)
         return formulaFinal
     }

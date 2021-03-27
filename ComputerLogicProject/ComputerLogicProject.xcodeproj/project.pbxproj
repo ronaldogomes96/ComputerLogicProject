@@ -17,6 +17,7 @@
 		778E5D6B25A14DC300B57002 /* Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 778E5D6A25A14DC300B57002 /* Functions.swift */; };
 		818ACC82260268F20033F65F /* MineSweeperDPPLSolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 818ACC81260268F20033F65F /* MineSweeperDPPLSolver.swift */; };
 		81BB494F260A604400BDC688 /* MineSweeperSolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81BB494E260A604400BDC688 /* MineSweeperSolver.swift */; };
+		81BFB6B1260E73A800CF2C8A /* CNF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81BFB6B0260E73A800CF2C8A /* CNF.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -43,6 +44,13 @@
 		778E5D6A25A14DC300B57002 /* Functions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Functions.swift; sourceTree = "<group>"; };
 		818ACC81260268F20033F65F /* MineSweeperDPPLSolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MineSweeperDPPLSolver.swift; sourceTree = "<group>"; };
 		81BB494E260A604400BDC688 /* MineSweeperSolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MineSweeperSolver.swift; sourceTree = "<group>"; };
+		81BFB6B0260E73A800CF2C8A /* CNF.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CNF.swift; sourceTree = "<group>"; };
+		81BFB6BE260E744300CF2C8A /* uuf50-01.cnf */ = {isa = PBXFileReference; lastKnownFileType = text; path = "uuf50-01.cnf"; sourceTree = "<group>"; };
+		81BFB6BF260E744300CF2C8A /* uuf50-02.cnf */ = {isa = PBXFileReference; lastKnownFileType = text; path = "uuf50-02.cnf"; sourceTree = "<group>"; };
+		81BFB6C0260E744300CF2C8A /* uuf50-03.cnf */ = {isa = PBXFileReference; lastKnownFileType = text; path = "uuf50-03.cnf"; sourceTree = "<group>"; };
+		81BFB6C9260E876000CF2C8A /* uf50-01.cnf */ = {isa = PBXFileReference; lastKnownFileType = text; path = "uf50-01.cnf"; sourceTree = "<group>"; };
+		81BFB6CA260E876000CF2C8A /* uf50-02.cnf */ = {isa = PBXFileReference; lastKnownFileType = text; path = "uf50-02.cnf"; sourceTree = "<group>"; };
+		81BFB6CB260E876000CF2C8A /* uf50-03.cnf */ = {isa = PBXFileReference; lastKnownFileType = text; path = "uf50-03.cnf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +83,8 @@
 		77013BB6258D177300FB4FA3 /* ComputerLogicProject */ = {
 			isa = PBXGroup;
 			children = (
+				81BFB6B4260E73B500CF2C8A /* Files */,
+				81BFB6AF260E739C00CF2C8A /* Helpers */,
 				77013BB7258D177300FB4FA3 /* main.swift */,
 				77013BBF258D1D8800FB4FA3 /* Formulas */,
 				77013BC0258D1D9000FB4FA3 /* Functions */,
@@ -103,6 +113,43 @@
 				778E5D6A25A14DC300B57002 /* Functions.swift */,
 			);
 			path = Functions;
+			sourceTree = "<group>";
+		};
+		81BFB6AF260E739C00CF2C8A /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				81BFB6B0260E73A800CF2C8A /* CNF.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		81BFB6B4260E73B500CF2C8A /* Files */ = {
+			isa = PBXGroup;
+			children = (
+				81BFB6BD260E742F00CF2C8A /* insatisfativeis */,
+				81BFB6B9260E741300CF2C8A /* satisfativeis */,
+			);
+			path = Files;
+			sourceTree = "<group>";
+		};
+		81BFB6B9260E741300CF2C8A /* satisfativeis */ = {
+			isa = PBXGroup;
+			children = (
+				81BFB6C9260E876000CF2C8A /* uf50-01.cnf */,
+				81BFB6CA260E876000CF2C8A /* uf50-02.cnf */,
+				81BFB6CB260E876000CF2C8A /* uf50-03.cnf */,
+			);
+			path = satisfativeis;
+			sourceTree = "<group>";
+		};
+		81BFB6BD260E742F00CF2C8A /* insatisfativeis */ = {
+			isa = PBXGroup;
+			children = (
+				81BFB6BE260E744300CF2C8A /* uuf50-01.cnf */,
+				81BFB6BF260E744300CF2C8A /* uuf50-02.cnf */,
+				81BFB6C0260E744300CF2C8A /* uuf50-03.cnf */,
+			);
+			path = insatisfativeis;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -166,10 +213,10 @@
 				77013BC8258D1E0700FB4FA3 /* Not.swift in Sources */,
 				77013BD1258D1E5300FB4FA3 /* Or.swift in Sources */,
 				778E5D6B25A14DC300B57002 /* Functions.swift in Sources */,
-				8118BD8925FAABD0002015E7 /* MineSweeperSolver.swift in Sources */,
 				818ACC82260268F20033F65F /* MineSweeperDPPLSolver.swift in Sources */,
 				77013BCB258D1E1D00FB4FA3 /* Implies.swift in Sources */,
 				77013BCE258D1E3800FB4FA3 /* And.swift in Sources */,
+				81BFB6B1260E73A800CF2C8A /* CNF.swift in Sources */,
 				81BB494F260A604400BDC688 /* MineSweeperSolver.swift in Sources */,
 				77013BC5258D1DF400FB4FA3 /* Atom.swift in Sources */,
 				77013BB8258D177300FB4FA3 /* main.swift in Sources */,
