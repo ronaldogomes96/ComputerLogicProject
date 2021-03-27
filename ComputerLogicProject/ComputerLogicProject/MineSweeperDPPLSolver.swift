@@ -71,7 +71,7 @@ class MineSweeperDPLL: DPLL {
         while literalUnit != nil {
             newValuation = newValuation.reduce(["\(literalUnit!.getFormulaDescription()) = true"]) { $0 + [$1] }
             newFormula = removeClauses(from: newFormula, with: literalUnit!)
-            // newFormula = removeComplement(from: formula, with: literalUnit!)
+            newFormula = removeComplement(from: newFormula, with: literalUnit!)
             literalUnit = getLiteralUnit(from: newFormula)
         }
         return (newFormula, newValuation)
@@ -95,7 +95,9 @@ class MineSweeperDPLL: DPLL {
         for (indexClause, clause) in newFormula.enumerated() {
             for  formulaLiteral in clause {
                 if contains(literal: literal, in: formulaLiteral) {
-                    newFormula.remove(at: indexClause)
+                    if newFormula.count > indexClause {
+                        newFormula.remove(at: indexClause)
+                    }
                 }
             }
         }
@@ -107,7 +109,7 @@ class MineSweeperDPLL: DPLL {
         let randomIndex = Int.random(in: 0..<clausalFormula.count)
         if !clausalFormula.isEmpty {
             let randomIndexAtomic = Int.random(in: 0..<clausalFormula[randomIndex].count)
-            if let insideFormula = clausalFormula[randomIndex][randomIndexAtomic] as? And {
+            if let insideFormula = clausalFormula[randomIndex][randomIndexAtomic] as? Or {
                 return getAtomic([[insideFormula.left]])
             }
             
@@ -171,12 +173,9 @@ class MineSweeperDPLL: DPLL {
     
     fileprivate func removeElementFromFormula(formula: Formula, literal: Formula) -> [Formula] {
         var arrayNames = functions.listOfAtoms(formula: formula)
-        print(arrayNames)
-        
         arrayNames = arrayNames.filter { !$0.elementsEqual(literal.getFormulaDescription()) }
         
         let atomArray = arrayNames.map { Atom($0) }
-        print(atomArray.count)
         return [functions.orAll(listOfFormulas: atomArray)]
     }
     
@@ -194,7 +193,7 @@ class MineSweeperDPLL: DPLL {
     
 }
 
-struct DPLLTests {
+struct MSDPLLTests {
 
     func removeClauseTest() {
         let solver = MineSweeperDPLL()

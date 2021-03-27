@@ -7,24 +7,23 @@
 
 import Foundation
 enum EnumFolder: String {
-    case satifiable =  "Documents/Studies/LogicForComputerScience/ComputerLogicProject/ComputerLogicProject/ComputerLogicProject/Files/satisfativeis"
-    case insatistiable =  "Documents/Studies/LogicForComputerScience/ComputerLogicProject/ComputerLogicProject/ComputerLogicProject/Files/insatisfativeis"
+    case satifiable =  "satisfativeis"
+    case insatistiable =  "insatisfativeis"
+    
+    static let projectRoot = "Documents/Studies/LogicForComputerScience/ComputerLogicProject/ComputerLogicProject/ComputerLogicProject/Files/"
 }
 class CNF {
     let fileManager = FileManager.default
-    var lines: Int
-    var numberOfLiterals: Int
     var fileString: String?
     
     @available(OSX 10.12, *)
-    init(from filePath: String, in folder: EnumFolder, lines: Int = 50, numberOfLiterals: Int = 218) {
-        self.lines = lines
-        self.numberOfLiterals = numberOfLiterals
-        
+    init(from filePath: String, folder: EnumFolder) {
         let folderPath = FileManager.default.homeDirectoryForCurrentUser
+            .appendingPathComponent(EnumFolder.projectRoot)
             .appendingPathComponent(folder.rawValue)
             .appendingPathComponent(filePath)
             .appendingPathExtension("cnf")
+        
         self.fileString = read(filePath: folderPath.relativePath)
     }
     
@@ -43,7 +42,7 @@ class CNF {
     
     func transformInCNF() -> [[Int]] {
         var formula = ""
-        guard let fileString = fileString else { fatalError("File not founded") }
+        guard let fileString = fileString else { fatalError("File not found") }
 
         if let indexFormula = fileString.index(of: "p") {
             formula = String(fileString[indexFormula..<fileString.index(of: "%")!])

@@ -18,6 +18,7 @@
 		818ACC82260268F20033F65F /* MineSweeperDPPLSolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 818ACC81260268F20033F65F /* MineSweeperDPPLSolver.swift */; };
 		81BB494F260A604400BDC688 /* MineSweeperSolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81BB494E260A604400BDC688 /* MineSweeperSolver.swift */; };
 		81BFB6B1260E73A800CF2C8A /* CNF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81BFB6B0260E73A800CF2C8A /* CNF.swift */; };
+		81BFB6D2260F50EC00CF2C8A /* DPLLSolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81BFB6D1260F50EC00CF2C8A /* DPLLSolver.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -51,6 +52,7 @@
 		81BFB6C9260E876000CF2C8A /* uf50-01.cnf */ = {isa = PBXFileReference; lastKnownFileType = text; path = "uf50-01.cnf"; sourceTree = "<group>"; };
 		81BFB6CA260E876000CF2C8A /* uf50-02.cnf */ = {isa = PBXFileReference; lastKnownFileType = text; path = "uf50-02.cnf"; sourceTree = "<group>"; };
 		81BFB6CB260E876000CF2C8A /* uf50-03.cnf */ = {isa = PBXFileReference; lastKnownFileType = text; path = "uf50-03.cnf"; sourceTree = "<group>"; };
+		81BFB6D1260F50EC00CF2C8A /* DPLLSolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DPLLSolver.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +91,7 @@
 				77013BBF258D1D8800FB4FA3 /* Formulas */,
 				77013BC0258D1D9000FB4FA3 /* Functions */,
 				818ACC81260268F20033F65F /* MineSweeperDPPLSolver.swift */,
+				81BFB6D1260F50EC00CF2C8A /* DPLLSolver.swift */,
 				81BB494E260A604400BDC688 /* MineSweeperSolver.swift */,
 			);
 			path = ComputerLogicProject;
@@ -211,6 +214,7 @@
 			files = (
 				77013BC2258D1DCB00FB4FA3 /* FormulaProtocol.swift in Sources */,
 				77013BC8258D1E0700FB4FA3 /* Not.swift in Sources */,
+				81BFB6D2260F50EC00CF2C8A /* DPLLSolver.swift in Sources */,
 				77013BD1258D1E5300FB4FA3 /* Or.swift in Sources */,
 				778E5D6B25A14DC300B57002 /* Functions.swift in Sources */,
 				818ACC82260268F20033F65F /* MineSweeperDPPLSolver.swift in Sources */,
