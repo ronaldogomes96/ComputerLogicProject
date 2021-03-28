@@ -43,13 +43,15 @@ for (index, grid) in grid.listOfGrid().enumerated() {
     results["\(index+1)"]?.append(diff.toMinutes())
     print(results)
     
-    print("\nDPLL")
-    start = CFAbsoluteTimeGetCurrent()
-    let integerFormula = mine.convertToIntegerCNF(formula)
-    dpll.getLogicalConsequenceForGrid(grid: grid, formula: integerFormula)
-    diff = CFAbsoluteTimeGetCurrent() - start
-    results["\(index+1)"]?.append(diff.toMinutes())
-    print(results)
+    if index < 3 {
+        print("\nDPLL")
+        start = CFAbsoluteTimeGetCurrent()
+        let integerFormula = mine.convertToIntegerCNF(formula)
+        dpll.getLogicalConsequenceForGrid(grid: grid, formula: integerFormula)
+        diff = CFAbsoluteTimeGetCurrent() - start
+        results["\(index+1)"]?.append(diff.toMinutes())
+        print(results)
+    }
 }
 
 
