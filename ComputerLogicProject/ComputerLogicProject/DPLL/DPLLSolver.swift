@@ -84,9 +84,10 @@ class DPLLSolver {
         var newFormula = formula
         
         for (indexClause, clause) in newFormula.enumerated() {
-            for (literalIndex, formulaLiteral) in clause.enumerated() {
+            for formulaLiteral in clause {
                 if formulaLiteral == literal * -1 {
-                    newFormula[indexClause].remove(at: literalIndex)
+                    let index = newFormula[indexClause].lastIndex(of: literal * -1)!
+                    newFormula[indexClause].remove(at: index)
                 }
             }
         }
@@ -99,15 +100,29 @@ class DPLLSolver {
     
 }
 
-struct DPLLSolverTests {
-    func testDPLL() {
-        if #available(OSX 10.12, *) {
-            let cnf = CNF(from: "uuf50-01", folder: .insatistiable).transformInCNF()
-            let result = DPLLSolver().solve(cnf)
-            print(result)
+
+extension DPLLSolver {
+    
+    func logicalConsequence(premises: [[[Int]]], conclusion: Int) -> Bool {
+        var uniquePremise = premises.first
+        uniquePremise?.append([conclusion * -1])
+        let consequence = uniquePremise!
+        if (solve(consequence) is Bool)  {
+            return true
         } else {
-            // Fallback on earlier versions
+            return false
         }
     }
+    
+    func getLogicalConsequenceForGrid(grid: [[Int]], formula: [[Int]]) {
+        for collun in 0...grid[0].count - 1 {
+            for line in 0...grid.count - 1 {
+                let conclusion = MineSweeperSolver().dictLiterals["m\(line)_\(collun)"]!
+                let consequence = self.logicalConsequence(premises: [formula], conclusion: conclusion)
+                print("m\(line)_\(collun) = \(consequence)")
+            }
+        }
+    }
+    
 }
 

@@ -18,7 +18,6 @@
 		77C43707260E528A000ECD14 /* Tableaux.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77C43706260E528A000ECD14 /* Tableaux.swift */; };
 		77C4370F260E5DF6000ECD14 /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77C4370E260E5DF6000ECD14 /* Grid.swift */; };
 		77C43712260E8AB8000ECD14 /* extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77C43711260E8AB8000ECD14 /* extension.swift */; };
-		818ACC82260268F20033F65F /* MineSweeperDPPLSolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 818ACC81260268F20033F65F /* MineSweeperDPPLSolver.swift */; };
 		81BB494F260A604400BDC688 /* MineSweeperSolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81BB494E260A604400BDC688 /* MineSweeperSolver.swift */; };
 		81BFB6B1260E73A800CF2C8A /* CNF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81BFB6B0260E73A800CF2C8A /* CNF.swift */; };
 		81BFB6D2260F50EC00CF2C8A /* DPLLSolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81BFB6D1260F50EC00CF2C8A /* DPLLSolver.swift */; };
@@ -49,7 +48,6 @@
 		77C43706260E528A000ECD14 /* Tableaux.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tableaux.swift; sourceTree = "<group>"; };
 		77C4370E260E5DF6000ECD14 /* Grid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grid.swift; sourceTree = "<group>"; };
 		77C43711260E8AB8000ECD14 /* extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extension.swift; sourceTree = "<group>"; };
-		818ACC81260268F20033F65F /* MineSweeperDPPLSolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MineSweeperDPPLSolver.swift; sourceTree = "<group>"; };
 		81BB494E260A604400BDC688 /* MineSweeperSolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MineSweeperSolver.swift; sourceTree = "<group>"; };
 		81BFB6B0260E73A800CF2C8A /* CNF.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CNF.swift; sourceTree = "<group>"; };
 		81BFB6BE260E744300CF2C8A /* uuf50-01.cnf */ = {isa = PBXFileReference; lastKnownFileType = text; path = "uuf50-01.cnf"; sourceTree = "<group>"; };
@@ -136,7 +134,6 @@
 			isa = PBXGroup;
 			children = (
 				81BFB6D1260F50EC00CF2C8A /* DPLLSolver.swift */,
-				818ACC81260268F20033F65F /* MineSweeperDPPLSolver.swift */,
 				81BFB6B4260E73B500CF2C8A /* Files */,
 			);
 			path = DPLL;
@@ -245,7 +242,6 @@
 				77C43707260E528A000ECD14 /* Tableaux.swift in Sources */,
 				77C4370F260E5DF6000ECD14 /* Grid.swift in Sources */,
 				778E5D6B25A14DC300B57002 /* Functions.swift in Sources */,
-				818ACC82260268F20033F65F /* MineSweeperDPPLSolver.swift in Sources */,
 				77013BCB258D1E1D00FB4FA3 /* Implies.swift in Sources */,
 				77013BCE258D1E3800FB4FA3 /* And.swift in Sources */,
 				81BFB6B1260E73A800CF2C8A /* CNF.swift in Sources */,

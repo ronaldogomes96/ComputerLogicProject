@@ -27,6 +27,18 @@ class Functions {
         }
     }
     
+    func listOfLiterals(formula: Formula) -> [String] {
+        if formula is Atom || formula is Not {
+            return [formula.getFormulaDescription()]
+        }
+        else {
+            guard let newFormula = formula as? Implies else {
+                return []
+            }
+            return listOfLiterals(formula: newFormula.left) + listOfLiterals(formula: newFormula.right)
+        }
+    }
+    
     func truthValue(formula: Formula, interpretation: [String: Bool]) -> Bool {
         if formula is Atom {
             return interpretation[formula.getFormulaDescription()] ?? Bool.init()
