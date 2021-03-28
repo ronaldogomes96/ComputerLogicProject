@@ -9,8 +9,9 @@ import Foundation
 enum EnumFolder: String {
     case satifiable =  "satisfativeis"
     case insatistiable =  "insatisfativeis"
+    case minesweeper =  "minesweeper"
     
-    static let projectRoot = "Documents/Studies/LogicForComputerScience/ComputerLogicProject/ComputerLogicProject/ComputerLogicProject/Files/"
+    static let projectRoot = "Documents/Studies/LogicForComputerScience/ComputerLogicProject/ComputerLogicProject/ComputerLogicProject/DPLL/Files"
 }
 class CNF {
     let fileManager = FileManager.default

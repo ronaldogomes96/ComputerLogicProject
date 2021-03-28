@@ -11,10 +11,11 @@ let grid = Grid()
 let mine = MineSweeperSolver()
 let function = Functions()
 let tableaux = Tableaux()
+let dpll = DPLLSolver()
 var results = [String: [Double]]()
 
 
-////Percorre cada um dos 10 grids
+//Percorre cada um dos 10 grids
 for (index, grid) in grid.listOfGrid().enumerated() {
 
     //Faz a modelagem do grid em uma formula
@@ -41,6 +42,16 @@ for (index, grid) in grid.listOfGrid().enumerated() {
     diff = CFAbsoluteTimeGetCurrent() - start
     results["\(index+1)"]?.append(diff.toMinutes())
     print(results)
+    
+    if index < 3 {
+        print("\nDPLL")
+        start = CFAbsoluteTimeGetCurrent()
+        let integerFormula = mine.convertToIntegerCNF(formula)
+        dpll.getLogicalConsequenceForGrid(grid: grid, formula: integerFormula)
+        diff = CFAbsoluteTimeGetCurrent() - start
+        results["\(index+1)"]?.append(diff.toMinutes())
+        print(results)
+    }
 }
 
 

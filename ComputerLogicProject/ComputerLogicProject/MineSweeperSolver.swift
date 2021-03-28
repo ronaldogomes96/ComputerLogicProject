@@ -10,6 +10,16 @@ import Foundation
 class MineSweeperSolver {
     
     private let functions = Functions()
+    let dictLiterals = ["m0_0": 1, "m1_0": 11, "m2_0": 21, "m3_0": 31, "m4_0": 41,
+                        "m0_1": 2, "m1_1": 12, "m2_1": 22, "m3_1": 32, "m4_1": 42,
+                        "m0_2": 3, "m1_2": 13, "m2_2": 23, "m3_2": 33, "m4_2": 43,
+                        "m0_3": 4, "m1_3": 14, "m2_3": 24, "m3_3": 34, "m4_3": 44,
+                        "m0_4": 5, "m1_4": 15, "m2_4": 25, "m3_4": 35, "m4_4": 45,
+                        "m0_5": 6, "m1_5": 16, "m2_5": 26, "m3_5": 36, "m4_5": 46,
+                        "m0_6": 7, "m1_6": 17, "m2_6": 27, "m3_6": 37, "m4_6": 47,
+                        "m0_7": 8, "m1_7": 18, "m2_7": 28, "m3_7": 38, "m4_7": 48,
+                        "m0_8": 9, "m1_8": 19, "m2_8": 29, "m3_8": 39, "m4_8": 49,
+                        "m0_9": 10, "m1_9": 20, "m2_9": 30, "m3_9": 40, "m4_9": 50]
     // Array de (i, j)
     public func mapMatrix(matrix: [[Int]]) -> Formula {
         
@@ -161,6 +171,82 @@ class MineSweeperSolver {
 
     }
     
+}
 
+extension MineSweeperSolver {
+    
+    func convertToCNF(_ formula: Formula) -> Formula {
+        var result = implicationFree(formula)
+        result = negationNormalForm(formula)
+        result = distributive(result)
+        return result
+    }
+    
+    func implicationFree(_ formula: Formula) -> Formula {
+        return formula
+    }
+    
+    func negationNormalForm(_ formula: Formula) -> Formula {
+        return formula
+    }
+    
+    func distributive(_ formula: Formula) -> Formula {
+        if formula is Atom || formula is Not {
+            return formula
+        }
+        
+        if let formula = formula as? And {
+            return And(distributive(formula.left), distributive(formula.right))
+        }
+        
+        if let formula = formula as? Or {
+            let left = distributive(formula.left)
+            let right = distributive(formula.right)
+            
+            if let andLeft = left as? And {
+                return And(distributive(Or(andLeft.left, right)), distributive(Or(andLeft.right, right)))
+            }
+            
+            if let andRight = right as? And {
+                return And(distributive(Or(left, andRight.left)), distributive(Or(left, andRight.right)))
+            }
+            return Or(left, right)
+        }
+        return formula
+    }
+    
+    func convertToIntegerCNF(_ formula: Formula) -> [[Int]] {
+        let convertedCNF = self.convertToCNF(formula)
+        return getArrayLiteralsFromOrFormula(convertedCNF)
+    }
+    
+    func getArrayLiteralsFromOrFormula(_ formula: Formula) -> [[Int]] {
+        if formula is Atom {
+            return [[Int(dictLiterals[formula.getFormulaDescription()]!)]]
+        }
+        
+        if let formulaNot = formula as? Not {
+            return [[Int(dictLiterals[(formulaNot.inner.getFormulaDescription())]!) * -1]]
+        }
+        
+        if let formula = formula as? And {
+            return getArrayLiteralsFromOrFormula(formula.left) + getArrayLiteralsFromOrFormula(formula.right)
+        }
+        
+        if let formula = formula as? Or {
+            let allLiterals = functions.listOfLiterals(formula: formula)
+            let transformToInt = allLiterals.map { literal -> Int in
+                if literal.contains("-") {
+                    var newLiteral = literal
+                    newLiteral.removeFirst()
+                    return (Int(dictLiterals[newLiteral]!) * -1)
+                } else {
+                    return (Int(dictLiterals[literal]!))
+                }
+            }
+            return [transformToInt]
+        }
+        return [[]]
+    }
     
 }
