@@ -21,7 +21,7 @@ for (index, grid) in grid.listOfGrid().enumerated() {
     //Faz a modelagem do grid em uma formula
     let formula = mine.mapMatrix(matrix: grid)
 
-    print("\n\n\nGRID\(index+1)")
+    print("\n\nGRID\(index+1)")
     results["\(index+1)"] = []
 
     // run your work
@@ -33,7 +33,6 @@ for (index, grid) in grid.listOfGrid().enumerated() {
     function.getLogicaConsequenceForGrid(grid: grid, formula: formula)
     var diff = CFAbsoluteTimeGetCurrent() - start
     results["\(index+1)"]?.append(diff.toMinutes())
-    print(results)
 
     //Consequencia logica pelo metodo dos tableaux
     print("\nTABLEUX")
@@ -41,8 +40,8 @@ for (index, grid) in grid.listOfGrid().enumerated() {
     tableaux.getLogicaConsequenceForGrid(grid: grid, formula: formula)
     diff = CFAbsoluteTimeGetCurrent() - start
     results["\(index+1)"]?.append(diff.toMinutes())
-    print(results)
     
+    //Consequencia logica pelo metodo do DDPL
     if index < 3 {
         print("\nDPLL")
         start = CFAbsoluteTimeGetCurrent()
@@ -50,7 +49,6 @@ for (index, grid) in grid.listOfGrid().enumerated() {
         dpll.getLogicalConsequenceForGrid(grid: grid, formula: integerFormula)
         diff = CFAbsoluteTimeGetCurrent() - start
         results["\(index+1)"]?.append(diff.toMinutes())
-        print(results)
     }
 }
 
